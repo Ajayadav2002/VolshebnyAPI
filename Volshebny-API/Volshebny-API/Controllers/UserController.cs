@@ -5,7 +5,7 @@ using Volshebny_API.Models;
 
 namespace Volshebny_API.Controllers
 {
-   // [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace Volshebny_API.Controllers
 
         [Route("api/CommonUser")]
         [HttpPost]
-        public IActionResult User(User user)
+        public IActionResult Users([FromBody]User user)
         {
             try
             {
@@ -50,9 +50,9 @@ namespace Volshebny_API.Controllers
                     command.Parameters.AddWithValue("_ModifiedBy", user.ModifiedBy);
                     command.Parameters.AddWithValue("_ModifiedDate", user.ModifiedDate);
                     command.Parameters.AddWithValue("_IsActive", user.IsActive);
+                    command.Parameters.AddWithValue("_Authority", user.Authority);
                     command.Parameters.AddWithValue("_IsDeleted", user.IsDeleted);
                     command.Parameters.AddWithValue("_SpType", user.SpType);
-
 
                     MySqlParameter resultParam = new MySqlParameter("_Result", MySqlDbType.Int32);
                     resultParam.Direction = System.Data.ParameterDirection.Output;
@@ -75,8 +75,6 @@ namespace Volshebny_API.Controllers
                             apiResult.data = new { Id = result };
                             return Ok(apiResult);
                         }
-
-
                     }
                     else if (user.SpType == "E" || user.SpType == "R")
                     {
@@ -108,6 +106,7 @@ namespace Volshebny_API.Controllers
                                         CreatedDate = reader["CreatedDate"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedDate"]) : (DateTime?)null,
                                         ModifiedBy = reader["ModifiedBy"] != DBNull.Value ? Convert.ToInt32(reader["ModifiedBy"]) : (int?)null,
                                         ModifiedDate = reader["ModifiedDate"] != DBNull.Value ? Convert.ToDateTime(reader["ModifiedDate"]) : (DateTime?)null,
+                                        Authority = reader["Authority"] != DBNull.Value ? reader["Authority"].ToString() : null,
                                         IsActive = reader["IsActive"] != DBNull.Value ? Convert.ToBoolean(reader["IsActive"]) : (bool?)null,
                                     };
 

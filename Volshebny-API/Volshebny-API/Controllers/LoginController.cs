@@ -6,7 +6,7 @@ using Volshebny_API.Models;
 
 namespace Volshebny_API.Controllers
 {
-   // [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Volshebny_API.Controllers
 
         [Route("api/AdminLogin")]
         [HttpPost]
-        public IActionResult LoginAdminFranchisee(LoginAdmin loginadmin)
+        public IActionResult LoginAdminFranchisee([FromBody]LoginAdmin loginadmin)
         {
             try
             {
@@ -45,7 +45,6 @@ namespace Volshebny_API.Controllers
 
                     if (result == 1)
                     {
-
                         using (var reader = command.ExecuteReader())
                         {
                             if (reader.HasRows)

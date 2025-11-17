@@ -2,7 +2,7 @@
 {
     public class Client
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? MobileNo { get; set; }
@@ -17,6 +17,7 @@
         public int? CityId { get; set; }
         public string? Pincode { get; set; }
         public int? CreatedBy { get; set; }
+        public string? GSTCertificate { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
